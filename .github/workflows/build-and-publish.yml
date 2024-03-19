@@ -54,7 +54,7 @@ jobs:
         run: |
             npm i && npm i -g json@latest
             old_version=$(json -f ./package.json version)
-            git checkout -b "$PACKAGE_NAME"
+            git checkout "$PACKAGE_NAME"
             new_version=$(npm show "$package_name" version)
             rm package-lock.json
             npm install --package-lock-json
