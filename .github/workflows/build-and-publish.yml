@@ -15,7 +15,7 @@ jobs:
           node-version: 18.x
           
       - name: 'Install dependencies'
-        run: 'npm run install'
+        run: 'cd lib-gh && npm run install'
         
       - name: 'Build package'
         run: 'npm run build'
