@@ -35,7 +35,7 @@ jobs:
             git config --global user.email "farhan.nurzi@deriv.com"
             git config --global user.name "Farhan Ahmad Nurzi"
             # check if branch already exists in remote
-            if [ $( git ls-remote origin "$PACKAGE_NAME" ) ]
+            if [ $(git ls-remote origin "$PACKAGE_NAME" | wc -l) == "1" ]
               then
               # if the branch already exists delete it
               git push origin -d "$PACKAGE_NAME"
