@@ -13,8 +13,13 @@ jobs:
         uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
         with:
           node-version: 18.x
+          
+      - name: 'Install dependencies'
+        run: 'npm run install'
+        
       - name: 'Build package'
         run: 'npm run build'
+        
       - name: 'Publish package'
         run: |
             npm version minor
