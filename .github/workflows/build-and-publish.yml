@@ -44,7 +44,7 @@ jobs:
             git reset --hard main
             npm version minor
             npm publish
-            sleep 10s
+            sleep 30s
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
