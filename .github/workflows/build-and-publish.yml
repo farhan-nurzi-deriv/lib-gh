@@ -54,7 +54,7 @@ jobs:
             old_version=$(json -f ./package.json version)
             new_version=$(npm show "$PACKAGE_NAME" version)
             rm package-lock.json
-            npm install --package-lock-json
+            npm install --package-lock.json
             git commit -a -m "feat: bump from $old_version to $new_version"
             git push --set-upstream origin "$PACKAGE_NAME" -f
             sudo apt install gh
