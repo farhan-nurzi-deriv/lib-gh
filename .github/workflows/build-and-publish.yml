@@ -28,5 +28,7 @@ jobs:
         
       - name: 'Publish package'
         run: |
+            git config --global user.email "farhan.nurzi@deriv.com"
+            git config --global user.name "Farhan Ahmad Nurzi"
             npm version minor
             npm publish
