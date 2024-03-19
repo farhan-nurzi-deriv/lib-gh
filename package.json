@@ -1,0 +1,26 @@
+{
+  "name": "lib-gh",
+  "version": "0.0.0",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/lib-gh.umd.cjs",
+  "module": "./dist/lib-gh.js",
+  "exports": {
+    ".": {
+      "import": "./dist/lib-gh.js",
+      "require": "./dist/lib-gh.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.3.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.0",
+    "vite": "^5.0.0"
+  }
+}
