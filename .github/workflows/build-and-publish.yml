@@ -35,9 +35,15 @@ jobs:
         run: |
             git config --global user.email "farhan.nurzi@deriv.com"
             git config --global user.name "Farhan Ahmad Nurzi"
-            echo "old_version=$(json -f ./package.json version)" >> "$GITHUB_OUTPUT"
-            new_version=$(npm version minor)
-            git checkout -b "$PACKAGE_NAME:$new_version"
+            # check if branch already exists in remote
+            if [ $( git ls-remote origin "$package_name" ) ]
+              then
+              # if the branch already exists delete it
+              git push origin -d "$package_name"
+            fi
+            git checkout -b "$PACKAGE_NAME"
+            git reset --hard main
+            npm version minor
             npm publish
             sleep 30s
         env:
@@ -46,9 +52,9 @@ jobs:
       - name: 'Bump package version'
         if: always()
         run: |
-            old_version=${{ steps.publish-package.outputs.old_version }}
+            old_version=$(json -f ./package.json version)
+            git checkout -b "$PACKAGE_NAME"
             new_version=$(npm show "$package_name" version)
-            git branch
             npm i && npm i -g json@latest
             rm package-lock.json
             npm install --package-lock-json
