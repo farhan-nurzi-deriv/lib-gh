@@ -60,12 +60,9 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          commit-message: "chore: update $PACKAGE_NAME to ${{ steps.check_new_version.outputs.new_version }}"
-          title: "chore: update $PACKAGE_NAME to ${{ steps.check_new_version.outputs.new_version }}"
-          body: "This PR updates $PACKAGE_NAME to ${{ steps.check_new_version.outputs.new_version }}"
-          branch: "chore/update-$PACKAGE_NAME-to-${{ steps.check_new_version.outputs.new_version }}"
+          commit-message: "chore: update ${{ env.PACKAGE_NAME }} to ${{ steps.check_new_version.outputs.new_version }}"
+          title: "chore: update ${{ env.PACKAGE_NAME }} to ${{ steps.check_new_version.outputs.new_version }}"
+          body: "This PR updates ${{ env.PACKAGE_NAME }} to ${{ steps.check_new_version.outputs.new_version }}"
+          branch: "chore/update-${{ env.PACKAGE_NAME }}-to-${{ steps.check_new_version.outputs.new_version }}"
           base: "master"
-          draft: false
-          changes: "auto"
           path: "deriv-app"
-          push-branch: true
