@@ -1,0 +1,21 @@
+name: Build and publish package
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_publish:
+    runs-on: Ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    steps:
+      - name: 'Setup node'
+        uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
+        with:
+          node-version: 18.x
+      - name: 'Build package'
+        run: 'npm run build'
+      - name: 'Publish package'
+        run: |
+            npm version minor
+            npm publish
