@@ -41,18 +41,14 @@ jobs:
             fi
             git checkout -b "$PACKAGE_NAME"
             git reset --hard main
-            old_version=$(json -f ./package.json version)
-            new_version=$(npm version minor)
-            if [ $old version == $new_version ]
-              then
-              exit 0
-            fi
+            npm version minor
             npm publish
             sleep 10s
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 'Bump package version'
+        if: always()
         run: |
             npm i && npm i -g json@latest
             old_version=$(json -f ./package.json version)
