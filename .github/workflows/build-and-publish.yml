@@ -8,6 +8,8 @@ jobs:
     permissions:
       checks: write
       pull-requests: write
+    env:
+      PACKAGE_NAME: 'lib-gh'
     steps:
       - name: 'Setup node'
         uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8
@@ -31,7 +33,35 @@ jobs:
         run: |
             git config --global user.email "farhan.nurzi@deriv.com"
             git config --global user.name "Farhan Ahmad Nurzi"
+            # check if branch already exists in remote
+            if [ $( git ls-remote origin "$PACKAGE_NAME" ) ]
+              then
+              # if the branch already exists delete it
+              git push origin -d "$package_name"
+            fi
+            git checkout -b "$PACKAGE_NAME"
+            git reset --hard master
             npm version minor
             npm publish
+            sleep 30s
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: 'Bump package version'
+        run: |
+            npm i && npm i -g json@latest
+            old_version=$(json -f ./package.json version)
+            new_version=$(npm show "$PACKAGE_NAME" version)
+            rm package-lock.json
+            npm install --package-lock-json
+            git commit -a -m "feat: bump from $old_version to $new_version"
+            git push --set-upstream origin "$PACKAGE_NAME" -f
+            sudo apt install gh
+            gh auth login --with-token <<< ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+            diff_url="https://diff.intrinsic.com/$PACKAGE_NAME/$old_version/$new_version.diff"
+            pr_body=$(curl $diff_url)
+            # close the PR if it already exists and create a new one
+            gh pr close "$PACKAGE_NAME" || true
+            # Create new PR with diff as body
+            gh pr create --title "Bump $PACKAGE_NAME from $old_version to $new_version" --body "\`\`\`diff ${pr_body:0:5000} \`\`\` Diff url: $diff_url" --base "master" --head "$PACKAGE_NAME"
+            
