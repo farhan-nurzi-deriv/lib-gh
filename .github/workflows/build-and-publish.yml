@@ -41,9 +41,14 @@ jobs:
             fi
             git checkout -b "$PACKAGE_NAME"
             git reset --hard main
-            npm version minor
+            old_version=$(json -f ./package.json version)
+            new_version=$(npm version minor)
+            if [ $old version == $new_version ]
+              then
+              exit 0
+            fi
             npm publish
-            sleep 30s
+            sleep 10s
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
