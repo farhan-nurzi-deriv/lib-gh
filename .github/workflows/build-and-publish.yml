@@ -21,7 +21,7 @@ jobs:
           ref: main
           
       - name: 'Install dependencies'
-        run: 'npm run install'
+        run: 'npm install'
         
       - name: 'Build package'
         run: 'npm run build'
