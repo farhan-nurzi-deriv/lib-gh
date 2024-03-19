@@ -37,7 +37,7 @@ jobs:
             if [ $( git ls-remote origin "$PACKAGE_NAME" ) ]
               then
               # if the branch already exists delete it
-              git push origin -d "$package_name"
+              git push origin -d "$PACKAGE_NAME"
             fi
             git checkout -b "$PACKAGE_NAME"
             git reset --hard main
