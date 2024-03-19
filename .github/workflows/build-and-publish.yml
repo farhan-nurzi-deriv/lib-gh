@@ -53,6 +53,7 @@ jobs:
         if: always()
         run: |
             npm i && npm i -g json@latest
+            git checkout main
             old_version=$(json -f ./package.json version)
             git checkout "$PACKAGE_NAME"
             new_version=$(npm show "$PACKAGE_NAME" version)
