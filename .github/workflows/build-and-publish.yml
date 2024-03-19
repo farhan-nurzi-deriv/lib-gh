@@ -64,7 +64,7 @@ jobs:
             # close the PR if it already exists and create a new one
             gh pr close "$PACKAGE_NAME" || true
             # Create new PR with diff as body
-            gh pr create --title "Bump $PACKAGE_NAME from $old_version to $new_version" --body "\`\`\`diff ${pr_body:0:5000} \`\`\` Diff url: $diff_url" --base "master" --head "farhan-nurzi-deriv:$PACKAGE_NAME"
+            gh pr create --title "Bump $PACKAGE_NAME from $old_version to $new_version" --body "\`\`\`diff ${pr_body:0:5000} \`\`\` Diff url: $diff_url" --base "main" --head "farhan-nurzi-deriv:$PACKAGE_NAME"
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
             
