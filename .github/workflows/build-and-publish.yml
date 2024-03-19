@@ -7,6 +7,7 @@ jobs:
     runs-on: Ubuntu-latest
     permissions:
       checks: write
+      contents: write
       pull-requests: write
     env:
       PACKAGE_NAME: 'lib-gh'
