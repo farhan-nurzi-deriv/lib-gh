@@ -35,18 +35,11 @@ jobs:
         run: |
             git config --global user.email "farhan.nurzi@deriv.com"
             git config --global user.name "Farhan Ahmad Nurzi"
-            if [ $( git ls-remote origin "$package_name" | wc -l ) == "1" ]
-              then
-              # if the branch already exists delete it
-              git push origin -d "$package_name"
-            fi
-            git checkout -b "$PACKAGE_NAME"
             echo "old_version=$(json -f ./package.json version)" >> "$GITHUB_OUTPUT"
-            npm version minor
-            git status
+            new_version=$(npm version minor)
+            git checkout -b "$PACKAGE_NAME:$new_version"
             npm publish
             sleep 30s
-            echo "new_version=$(npm show "$PACKAGE_NAME" version)" >> "$GITHUB_OUTPUT"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -54,7 +47,8 @@ jobs:
         if: always()
         run: |
             old_version=${{ steps.publish-package.outputs.old_version }}
-            new_version=${{ steps.publish-package.outputs.new_version }}
+            new_version=$(npm show "$package_name" version)
+            git branch
             npm i && npm i -g json@latest
             rm package-lock.json
             npm install --package-lock-json
