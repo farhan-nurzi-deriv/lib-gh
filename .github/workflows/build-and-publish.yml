@@ -40,7 +40,7 @@ jobs:
               git push origin -d "$package_name"
             fi
             git checkout -b "$PACKAGE_NAME"
-            git reset --hard master
+            git reset --hard main
             npm version minor
             npm publish
             sleep 30s
