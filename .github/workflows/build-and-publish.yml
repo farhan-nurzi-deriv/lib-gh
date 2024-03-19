@@ -43,6 +43,7 @@ jobs:
             git checkout -b "$PACKAGE_NAME"
             echo "old_version=$(json -f ./package.json version)" >> "$GITHUB_OUTPUT"
             npm version minor
+            git status
             npm publish
             sleep 30s
             echo "new_version=$(npm show "$PACKAGE_NAME" version)" >> "$GITHUB_OUTPUT"
