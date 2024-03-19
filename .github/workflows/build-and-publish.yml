@@ -55,7 +55,7 @@ jobs:
             npm i && npm i -g json@latest
             old_version=$(json -f ./package.json version)
             git checkout "$PACKAGE_NAME"
-            new_version=$(npm show "$package_name" version)
+            new_version=$(npm show "$PACKAGE_NAME" version)
             git reset HEAD^
             git commit -a -m "feat: bump from $old_version to $new_version"
             git push --set-upstream origin "$PACKAGE_NAME" -f
