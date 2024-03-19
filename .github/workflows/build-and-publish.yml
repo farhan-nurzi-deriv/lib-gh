@@ -38,6 +38,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      - name: Checkout deriv-app
+        uses: "binary-com/SmartCharts/.github/actions/checkout@master"
+        with:
+          repository: "farhan-nurzi-deriv/deriv-app"
+          path: deriv-app
+          ref: master
+
       - name: Check new version
         id: check_new_version
         run: |
@@ -48,8 +55,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          commit-message: "chore: test ${{ steps.check_new_version.outputs.new_version }}"
-          title: Update deriv-charts to ${{ steps.check_new_version.outputs.new_version }}
-          body: This PR updates @deriv/deriv-charts to ${{ steps.check_new_version.outputs.new_version }}
-          branch: chore/update-deriv-charts-to-${{ steps.check_new_version.outputs.new_version }}
-          base: main
+          commit-message: "chore: update @deriv/deriv-charts to ${{ steps.check_new_version.outputs.new_version }}"
+          title: "Update deriv-charts to ${{ steps.check_new_version.outputs.new_version }}"
+          body: "This PR updates @deriv/deriv-charts to ${{ steps.check_new_version.outputs.new_version }}"
+          branch: "chore/update-deriv-charts-to-${{ steps.check_new_version.outputs.new_version }}"
+          base: "master"
