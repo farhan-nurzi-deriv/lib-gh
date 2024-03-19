@@ -52,10 +52,10 @@ jobs:
       - name: 'Bump package version'
         if: always()
         run: |
+            npm i && npm i -g json@latest
             old_version=$(json -f ./package.json version)
             git checkout -b "$PACKAGE_NAME"
             new_version=$(npm show "$package_name" version)
-            npm i && npm i -g json@latest
             rm package-lock.json
             npm install --package-lock-json
             git commit -a -m "feat: bump from $old_version to $new_version"
