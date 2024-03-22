@@ -67,19 +67,19 @@ jobs:
         run: |
           cd deriv-app/packages/core
           tmp=$(mktemp)
-          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
+          jq --indent 4 ".dependencies[\"@deriv/deriv-charts\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
-      - name: Update reports package.json
+      - name: Update trader package.json
         run: |
-          cd deriv-app/packages/reports
+          cd deriv-app/packages/trader
           tmp=$(mktemp)
-          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
+          jq --indent 4 ".dependencies[\"@deriv/deriv-charts\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
-      - name: Update shared package.json
+      - name: Update bot-web-ui package.json
         run: |
-          cd deriv-app/packages/shared
+          cd deriv-app/packages/bot-web-ui
           tmp=$(mktemp)
-          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
+          jq --indent 4 ".dependencies[\"@deriv/deriv-charts\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
       - name: Update package-lock.json
         run: |
