@@ -73,7 +73,7 @@ jobs:
           npm install && npm run bootstrap
 
       - name: Create Pull Request to deriv-app repo
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           commit-message: "chore: update ${{ env.PACKAGE_NAME }} to ${{ steps.check_new_version.outputs.new_version }}"
