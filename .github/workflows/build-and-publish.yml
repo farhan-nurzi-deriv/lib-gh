@@ -65,7 +65,7 @@ jobs:
           cd deriv-app/packages/core
           sudo apt-get install jq
           tmp=$(mktemp)
-          jq --indent 4 ".dependencies[\"$PACKAGE_NAME\"] = \"^${{ steps.check_new_version.outputs.new_version }}\"" package.json > "$tmp" && mv "$tmp" package.json
+          jq --indent 4 ".dependencies[\"usehooks-ts\"] = \"^${{ steps.check_new_version.outputs.new_version }}\"" package.json > "$tmp" && mv "$tmp" package.json
 
       - name: Update package-lock.json
         run: |
