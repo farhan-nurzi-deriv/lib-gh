@@ -67,19 +67,19 @@ jobs:
         run: |
           cd deriv-app/packages/core
           tmp=$(mktemp)
-          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^${{ steps.check_new_version.outputs.new_version }}\"" package.json > "$tmp" && mv "$tmp" package.json
+          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
       - name: Update reports package.json
         run: |
           cd deriv-app/packages/reports
           tmp=$(mktemp)
-          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^${{ steps.check_new_version.outputs.new_version }}\"" package.json > "$tmp" && mv "$tmp" package.json
+          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
       - name: Update shared package.json
         run: |
           cd deriv-app/packages/shared
           tmp=$(mktemp)
-          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^${{ steps.check_new_version.outputs.new_version }}\"" package.json > "$tmp" && mv "$tmp" package.json
+          jq --indent 4 ".dependencies[\"canvas-toBlob\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
       - name: Update package-lock.json
         run: |
