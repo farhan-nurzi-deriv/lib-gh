@@ -64,7 +64,7 @@ jobs:
         run: |
           cd deriv-app/packages/core
           sudo apt-get install jq
-          echo (jq ".dependencies[\"$PACKAGE_NAME\"] = \"$new_version\"" package.json) > package.json
+          echo "$(jq --arg new_version ${{ steps.check_new_version.outputs.new_version }} '.dependencies["$PACKAGE_NAME"]=$new_version' package.json)" > package.json
           echo "console.log('test')" > test.ts
 
       - name: Create Pull Request to deriv-app repo
