@@ -88,12 +88,12 @@ jobs:
 
       # lerna update root package-lock based on packages package.json
       - name: Update root package-lock.json
+        with:
+          NODE_ENV: development
         run: |
           cd deriv-app
           npm i -g lerna@^5.5.1
           npm run bootstrap:dev
-        with:
-          NODE_ENV: development
 
       - name: Create Pull Request to deriv-app repo
         uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e
