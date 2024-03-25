@@ -90,9 +90,10 @@ jobs:
       - name: Update root package-lock.json
         run: |
           cd deriv-app
-          npx lerna link
-          npx lerna bootstrap --hoist --strict
-          npx lerna link
+          npm i -g lerna@^5.5.1
+          lerna link
+          lerna bootstrap --hoist --strict
+          lerna link
 
       - name: Create Pull Request to deriv-app repo
         uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e
