@@ -86,12 +86,11 @@ jobs:
           tmp=$(mktemp)
           jq --indent 4 ".dependencies[\"@deriv/deriv-charts\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
-      # lerna update root package-lock based on packages package.json
       - name: Update root package-lock.json
         run: |
           cd deriv-app
           npm i -g lerna@^5.5.1
-          f () { npm ci && lerna link && lerna bootstrap --hoist --strict && lerna link ;}; f
+          npm ci && lerna link && lerna bootstrap --hoist --strict && lerna link
 
       - name: Create Pull Request to deriv-app repo
         uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e
