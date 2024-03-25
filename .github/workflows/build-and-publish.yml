@@ -90,7 +90,7 @@ jobs:
           jq --indent 4 ".dependencies[\"@deriv/deriv-charts\"] = \"^1.0.0\"" package.json > "$tmp" && mv "$tmp" package.json
 
       - name: Update package-lock.json
-        if: steps.update_core_package_json.outputs.changed == 'true' || steps.update_trader_package_json.outputs.changed == 'true' || steps.update_bot_web_ui_package_json.outputs.changed == 'true'
+        if: steps.update_core_package_json.outcome == 'success' && steps.update_trader_package_json.outcome == 'success' && steps.update_bot_web_ui_package_json.outcome == 'success'
         run: |
           cd deriv-app
           npm i -g lerna@^5.5.1
