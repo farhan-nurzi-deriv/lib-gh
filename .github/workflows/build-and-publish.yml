@@ -89,7 +89,6 @@ jobs:
       - name: Update root lerna package-lock
         run: |
           cd deriv-app
-          npm cache clean --force
           npm i -g lerna@^5.5.1
           lerna link
           lerna bootstrap --hoist --no-ci --strict
