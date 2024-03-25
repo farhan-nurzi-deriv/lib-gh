@@ -91,9 +91,7 @@ jobs:
         run: |
           cd deriv-app
           npm i -g lerna@^5.5.1
-          git status
-          export NODE_ENV=development
-          npm run bootstrap:dev
+          f () { npm ci && lerna link && lerna bootstrap --hoist --strict && lerna link ;}; f
 
       - name: Create Pull Request to deriv-app repo
         uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e
