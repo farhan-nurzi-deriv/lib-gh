@@ -89,7 +89,7 @@ jobs:
       - name: Update package-lock.json
         run: |
           cd deriv-app
-          npm install && npm run bootstrap:dev
+          npm run bootstrap:dev
           git status
 
       - name: Create Pull Request to deriv-app repo
